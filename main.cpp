@@ -3,6 +3,7 @@
 
 using namespace std;
 void BubbleSort(int tab[], int size);
+void SelectionSort(int tab[], int size);
 void PrintTab(int tab[], int size);
 void Swap(int* a, int* b);
 void RandTab(int tab[], int size);
@@ -13,7 +14,7 @@ int main()
 	int* tab = new int[size];
 	RandTab(tab, size);
 	PrintTab(tab, size);
-	BubbleSort(tab, size);
+	SelectionSort(tab, size);
 	PrintTab(tab, size);	
 
 	return 0;
@@ -30,6 +31,20 @@ void BubbleSort(int tab[], int size)
 				Swap(&tab[j], &tab[j + 1]);
 			}
 		}
+	}
+}
+
+void SelectionSort(int tab[], int size)
+{
+	int min;
+	for (int i = 0; i < size - 1; i++)
+	{
+		min = i;
+		for (int j = i+1; j < size; j++)
+		{			
+			if (tab[j] < tab[min]) min = j;
+		}
+		Swap(&tab[i], &tab[min]);
 	}
 }
 
