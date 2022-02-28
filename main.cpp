@@ -4,9 +4,11 @@
 using namespace std;
 void BubbleSort(int tab[], int size);
 void SelectionSort(int tab[], int size);
+void InsertSort(int tab[], int size);
 void PrintTab(int tab[], int size);
 void Swap(int* a, int* b);
 void RandTab(int tab[], int size);
+
 
 int main()
 {
@@ -14,7 +16,7 @@ int main()
 	int* tab = new int[size];
 	RandTab(tab, size);
 	PrintTab(tab, size);
-	SelectionSort(tab, size);
+	InsertSort(tab, size);
 	PrintTab(tab, size);	
 
 	return 0;
@@ -48,6 +50,20 @@ void SelectionSort(int tab[], int size)
 	}
 }
 
+void InsertSort(int tab[], int size)
+{
+	int key;
+	for (int i = 1; i < size; i++)
+	{
+		key = i;
+		while (tab[key] < tab[key - 1] && key > 0)
+		{
+			Swap(&tab[key], &tab[key - 1]);
+			key--;
+		}
+	}
+}
+
 void PrintTab(int tab[], int size)
 {
 	for (int i = 0; i < size; i++)
@@ -69,6 +85,6 @@ void RandTab(int tab[], int size)
 	srand(time(NULL));
 	for (int i = 0; i < size; i++)
 	{
-		tab[i] = rand() % 20 + 1;
+		tab[i] = rand() % 50 + 1;
 	}
 }
