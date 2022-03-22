@@ -5,6 +5,8 @@ using namespace std;
 void BubbleSort(int tab[], int size);
 void SelectionSort(int tab[], int size);
 void InsertSort(int tab[], int size);
+void SitoEratostenesa(int max);
+bool IsPrime(int num);
 void PrintTab(int tab[], int size);
 void Swap(int* a, int* b);
 void RandTab(int tab[], int size);
@@ -12,17 +14,11 @@ void RandTab(int tab[], int size);
 
 int main()
 {
-	const int size = 10;
-	int* tab = new int[size];
-	RandTab(tab, size);
-	PrintTab(tab, size);
-	InsertSort(tab, size);
-	PrintTab(tab, size);	
-
+	SitoEratostenesa(20);
 	return 0;
 }
 
-void BubbleSort(int tab[], int size) 
+void BubbleSort(int tab[], int size)
 {
 	for (int i = 0; i < size - 1; i++)
 	{
@@ -42,8 +38,8 @@ void SelectionSort(int tab[], int size)
 	for (int i = 0; i < size - 1; i++)
 	{
 		min = i;
-		for (int j = i+1; j < size; j++)
-		{			
+		for (int j = i + 1; j < size; j++)
+		{
 			if (tab[j] < tab[min]) min = j;
 		}
 		Swap(&tab[i], &tab[min]);
@@ -87,4 +83,45 @@ void RandTab(int tab[], int size)
 	{
 		tab[i] = rand() % 50 + 1;
 	}
+}
+
+void SitoEratostenesa(int max)
+{
+	bool* tab = new bool[max + 2];
+	for (int i = 0; i < max; i++)
+	{
+		tab[i] = true;
+	}
+
+	for (int i = 2; i <= max; i++)
+	{
+		if (tab[i] == false) continue;
+		if (IsPrime(i))
+		{
+			for (int j = i * 2; j <= max; j+=i)
+			{
+				tab[j] = false;
+			}
+		}
+	}
+
+	for (int i = 2; i <= max; i++)
+	{
+		if (tab[i] == true)
+		{
+			cout << i << endl;
+		}
+	}
+}
+
+bool IsPrime(int num)
+{
+	for (int i = 2; i <= num / 2; ++i)
+	{
+		if (num % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
 }
